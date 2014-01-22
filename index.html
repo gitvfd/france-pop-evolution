@@ -1,197 +1,197 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <meta charset="utf-8">
-	<head>
-		<title>France Population</title>
-		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-		<script src="js/update.js"></script>
-		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	</head>
+        <head>
+                <title>France Population</title>
+                <script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
+                <script src="js/update.js"></script>
+                <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        </head>
 
-	<style type="text/css">
-		
-		#dpts {
-  		stroke: grey;
-		stroke-width: 0.25px;
-		fill: none;
-		}
+        <style type="text/css">
+                
+                #dpts {
+                  stroke: grey;
+                stroke-width: 0.25px;
+                fill: none;
+                }
 
-		#tooltip {
-		  position: absolute;
-		  width: auto;
-		  height: auto;
-		  padding: 10px;
-		  background-color: white;
-		  -webkit-border-radius: 2px;
-		  -moz-border-radius: 2px;
-		  border-radius: 2px;
-		  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-		  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-		  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-		  pointer-events: none;
-		}
+                #tooltip {
+                  position: absolute;
+                  width: auto;
+                  height: auto;
+                  padding: 10px;
+                  background-color: white;
+                  -webkit-border-radius: 2px;
+                  -moz-border-radius: 2px;
+                  border-radius: 2px;
+                  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+                  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+                  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+                  pointer-events: none;
+                }
 
-		#tooltip.hidden {
-		  display: none;
-		}
+                #tooltip.hidden {
+                  display: none;
+                }
 
-		#tooltip p {
-		  margin: 0;
-		  font-family: sans-serif;
-		  font-size: 13px;
-		  line-height: 16px;
-		}
+                #tooltip p {
+                  margin: 0;
+                  font-family: sans-serif;
+                  font-size: 13px;
+                  line-height: 16px;
+                }
 
-		.button {
-			display: inline-block;
-			outline: none;
-			cursor: pointer;
-			text-align: center;
-			text-decoration: none;
-			font: 12px/100% TheSerif, sans-serif;
-			padding: .25em 1em .45em;
-			text-shadow: 0 1px 1px rgba(0,0,0,.3);
-			-webkit-border-radius: .5em; 
-			-moz-border-radius: .5em;
-			border-radius: .5em;
-			-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-			-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-			box-shadow: 0 1px 2px rgba(0,0,0,.2);
-		}
-		.button:hover {
-			text-decoration: none;
-		}
-		.button:active {
-			position: relative;
-			top: 1px;
-		}
-		.grey {
-			color: #464646;
-			border: solid 1px #afafaf;
-			background: #6e6e6e;
-			background: -webkit-gradient(linear, left top, left bottom, from(#deeaf1), to(#a5aebf));
-			background: -moz-linear-gradient(top,  #deeaf1,  #a5aebf);
-			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#deeaf1', endColorstr='#a5aebf');
-		}
-		.grey:hover {
+                .button {
+                        display: inline-block;
+                        outline: none;
+                        cursor: pointer;
+                        text-align: center;
+                        text-decoration: none;
+                        font: 12px/100% TheSerif, sans-serif;
+                        padding: .25em 1em .45em;
+                        text-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        -webkit-border-radius: .5em; 
+                        -moz-border-radius: .5em;
+                        border-radius: .5em;
+                        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                }
+                .button:hover {
+                        text-decoration: none;
+                }
+                .button:active {
+                        position: relative;
+                        top: 1px;
+                }
+                .grey {
+                        color: #464646;
+                        border: solid 1px #afafaf;
+                        background: #6e6e6e;
+                        background: -webkit-gradient(linear, left top, left bottom, from(#deeaf1), to(#a5aebf));
+                        background: -moz-linear-gradient(top,  #deeaf1,  #a5aebf);
+                        filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#deeaf1', endColorstr='#a5aebf');
+                }
+                .grey:hover {
 
-			color: #fff;
-			background: #616161;
-			background: -webkit-gradient(linear, left top, left bottom, from(#757575), to(#4b4b4b));
-			background: -moz-linear-gradient(top,  #757575,  #4b4b4b);
-			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#757575', endColorstr='#4b4b4b');
-		}
-		.grey:active {
-			color: #afafaf;
-			background: -webkit-gradient(linear, left top, left bottom, from(#a5aebf), to(#deeaf1));
-			background: -moz-linear-gradient(top,  #a5aebf,  #deeaf1);
-			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#a5aebf', endColorstr='#deeaf1');
-		}
+                        color: #fff;
+                        background: #616161;
+                        background: -webkit-gradient(linear, left top, left bottom, from(#757575), to(#4b4b4b));
+                        background: -moz-linear-gradient(top,  #757575,  #4b4b4b);
+                        filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#757575', endColorstr='#4b4b4b');
+                }
+                .grey:active {
+                        color: #afafaf;
+                        background: -webkit-gradient(linear, left top, left bottom, from(#a5aebf), to(#deeaf1));
+                        background: -moz-linear-gradient(top,  #a5aebf,  #deeaf1);
+                        filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#a5aebf', endColorstr='#deeaf1');
+                }
 
-		.key path {
-  			display: none;
-		}
+                .key path {
+                          display: none;
+                }
 
-		.key line {
-  			stroke: #000;
-  			shape-rendering: crispEdges;
-		}
-		.caption {
-  			font: 12px sans-serif;
-  			font-weight: bold;
-		}
+                .key line {
+                          stroke: #000;
+                          shape-rendering: crispEdges;
+                }
+                .legendtext {
+                          font: 8px sans-serif;
+                          font-style: italic;
+                }
 
-		svg {
-  			font: 8px sans-serif;
-		}
+                svg {
+                          font: 8px sans-serif;
+                }
 
-		.caption {
-  			font: 12px sans-serif;
-  			font-weight: bold;
-		}
+                .caption {
+                          font: 12px sans-serif;
+                          font-weight: bold;
+                }
 
-	</style>
-	<body>
-		<script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
-		<script src="http://d3js.org/topojson.v1.min.js"></script>
-		<script src="js/update.js"></script>
-		<script src="js/createScale.js"></script>
-		<div id="tooltip" class="hidden">
-  			<p><strong><span id="departmentNameTooltip">All</span></strong><span id="departmentNumberTooltip">All</span>: </p><span id="valueTooltip">10000</span> inhabitants</p><i><span id="growthTooltip">1</span></i>
-		</div>
-		<center>
-		<div class="row">
-			<div class="span8">
-			<h1 >Evolution of France population</h1>
-			</div><hr>
-		</div>	
-		<div class="row">
-			<div id="area3" class="span8">
-				<button class="button grey" id="Dimension" type="submit" value="1962" title="Housing" onclick="dptPop(value)">1962</button>
-				<button class="button grey" id="Dimension" type="submit" value="1968" title="Housing" onclick="dptPop(value)">1968</button>
-				<button class="button grey" id="Dimension" type="submit" value="1975" title="Housing" onclick="dptPop(value)">1975</button>
-				<button class="button grey" id="Dimension" type="submit" value="1982" title="Housing" onclick="dptPop(value)">1982</button>
-				<button class="button grey" id="Dimension" type="submit" value="1990" title="Housing" onclick="dptPop(value)">1990</button>
-				<button class="button grey" id="Dimension" type="submit" value="1999" title="Housing" onclick="dptPop(value)">1999</button>
-				<button class="button grey" id="Dimension" type="submit" value="2006" title="Housing" onclick="dptPop(value)">2006</button>
-				<button class="button grey" id="Dimension" type="submit" value="2011" title="Housing" onclick="dptPop(value)">2011</button>
-			</div>	
-		</div>
-		<div class="row">
-			<div class="span8">
-			    <h2 style="visibility: visible" id="yearClicked" >Select a year</h2>
-			</div>
-		</div>	
-		<div class="row">
-			<div id="area1" class="span8">
-				<script type="text/javascript">
-					var width = 750, 
-					    height = 550;
-					
-		    		var projection = d3.geo.mercator()
-		  				.center([4.5, 46.51])
-		  				.scale(2200)
-		  				.translate([(width) / 2, (height)/2])
-					    .precision(.1);
+        </style>
+        <body>
+                <script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+                <script src="http://d3js.org/topojson.v1.min.js"></script>
+                <script src="js/update.js"></script>
+                <script src="js/createScale.js"></script>
+                <div id="tooltip" class="hidden">
+                          <p><strong><span id="departmentNameTooltip">All</span></strong><span id="departmentNumberTooltip">All</span>: </p><span id="valueTooltip">10000</span> inhabitants</p><i><span id="growthTooltip">1</span></i>
+                </div>
+                <center>
+                <div class="row">
+                        <div class="span8">
+                        <h1 >Evolution of France population</h1>
+                        </div><hr>
+                </div>        
+                <div class="row">
+                        <div id="area3" class="span8">
+                                <button class="button grey" id="Dimension" type="submit" value="1962" title="Housing" onclick="dptPop(value)">1962</button>
+                                <button class="button grey" id="Dimension" type="submit" value="1968" title="Housing" onclick="dptPop(value)">1968</button>
+                                <button class="button grey" id="Dimension" type="submit" value="1975" title="Housing" onclick="dptPop(value)">1975</button>
+                                <button class="button grey" id="Dimension" type="submit" value="1982" title="Housing" onclick="dptPop(value)">1982</button>
+                                <button class="button grey" id="Dimension" type="submit" value="1990" title="Housing" onclick="dptPop(value)">1990</button>
+                                <button class="button grey" id="Dimension" type="submit" value="1999" title="Housing" onclick="dptPop(value)">1999</button>
+                                <button class="button grey" id="Dimension" type="submit" value="2006" title="Housing" onclick="dptPop(value)">2006</button>
+                                <button class="button grey" id="Dimension" type="submit" value="2011" title="Housing" onclick="dptPop(value)">2011</button>
+                        </div>        
+                </div>
+                <div class="row">
+                        <div class="span8">
+                            <h2 style="visibility: visible" id="yearClicked" >Select a year</h2>
+                        </div>
+                </div>        
+                <div class="row">
+                        <div id="area1" class="span8">
+                                <script type="text/javascript">
+                                        var width = 750, 
+                                            height = 550;
+                                        
+                                    var projection = d3.geo.mercator()
+                                                  .center([4.5, 46.51])
+                                                  .scale(2200)
+                                                  .translate([(width) / 2, (height)/2])
+                                            .precision(.1);
 
-					var path = d3.geo.path()
-					    .projection(projection);
+                                        var path = d3.geo.path()
+                                            .projection(projection);
 
-					var svg = d3.select(area1).append("svg")
-					    .attr("width", width)
-					    .attr("height", height);
+                                        var svg = d3.select(area1).append("svg")
+                                            .attr("width", width)
+                                            .attr("height", height);
 
-					var g = svg.append("g");
+                                        var g = svg.append("g");
 
-					var dpts= g.append("g")
-						.attr("id", "dpts")
+                                        var dpts= g.append("g")
+                                                .attr("id", "dpts")
 
-		    		d3.json("data/dpt2.json", function(error, dptFrance) {
-						dpts.selectAll(".dpts")
-							.data(dptFrance.features)
-							.enter().append("path")
-							.attr("class", function(d){ return d.properties.CODE_DEPT; })
-							.attr("d", path);
-					});
-				</script>
-			</div>	
-		</div>
-		<hr>
-		<div class="row">			
-			<div id="area2" class="span8">
-				<script type="text/javascript">
-					var width = 750, 
-					    height =150;
+                                    d3.json("data/dpt2.json", function(error, dptFrance) {
+                                                dpts.selectAll(".dpts")
+                                                        .data(dptFrance.features)
+                                                        .enter().append("path")
+                                                        .attr("class", function(d){ return d.properties.CODE_DEPT; })
+                                                        .attr("d", path);
+                                        });
+                                </script>
+                        </div>        
+                </div>
+                <hr>
+                <div class="row">                        
+                        <div id="area2" class="span8">
+                                <script type="text/javascript">
+                                        var width = 750, 
+                                            height =150;
 
-					var svg2 = d3.select(area2).append("svg")
-					    .attr("width", width)
-					    .attr("height", height);
+                                        var svg2 = d3.select(area2).append("svg")
+                                            .attr("width", width)
+                                            .attr("height", height);
 
-					createScale();
-				</script>
-			</div>	
-		</div>	
-		</center>
-		
-	</body>
+                                        createScale();
+                                </script>
+                        </div>        
+                </div>        
+                </center>
+                
+        </body>
 </html>
